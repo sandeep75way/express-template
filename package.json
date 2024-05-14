@@ -1,5 +1,5 @@
 {
-  "name": "la-teca",
+  "name": "test",
   "private": true,
   "scripts": {
     "local": "nodemon",
