@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+yarn run lint-staged ||
+(
+  echo '🟥🟥eslint check failed😥, try yarn run lint:fix or fix it manualy, add changes and commit again🟥🟥'
+  false;
+)
+
+echo "🟩🟩 Everything looks good, commiting now 🟩🟩"
