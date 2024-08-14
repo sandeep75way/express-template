@@ -11,7 +11,7 @@
     "lint:fix": "eslint --fix",
     "format": "prettier . -w",
     "format:check": "prettier . --check",
-    "postinstall": "husky install"
+    "postinstall": "husky install && chmod +x .husky/pre-commit"
   },
   "lint-staged": {
     "**/*.{js,ts}": [
