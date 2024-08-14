@@ -1,5 +1,5 @@
 {
-  "name": "pcg",
+  "name": "template",
   "private": true,
   "scripts": {
     "local": "nodemon",
