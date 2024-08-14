@@ -1,0 +1,34 @@
+version: "3.8"
+
+services:
+  pcg-backend:
+    build: .
+    container_name: backend
+    ports:
+      - "5000:5000"
+    environment:
+      - MONGO_URI=mongodb://mongo:27017
+      - DATABASE_NAME=pcg
+      - PORT=4000
+    depends_on:
+      - mongo
+    networks:
+      - pcg
+    restart: unless-stopped
+
+  mongo:
+    image: mongo:7.0.0
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - pcg
+
+volumes:
+  mongo-data:
+
+networks:
+  pcg:
+    driver: bridge

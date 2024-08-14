@@ -3,15 +3,12 @@ import bodyParser from "body-parser";
 import morgan from "morgan";
 import http from "http";
 
-import errorHandler from "./app/middleware/errorHandler";
-import { initDB } from "./app/services/initDB";
-import usersRoutes from "./app/routes/users";
-import adminRoutes from "./app/routes/admin";
-import { initPassport } from "./app/services/passport-jwt";
-import { loadConfig } from "./app/helper/config";
-import { roleAuth } from "./app/middleware/roleAuth";
-import { UserRole } from "./app/schema/User";
-import { IUser } from "./app/schema/User";
+import { initDB } from "./app/common/services/database.service";
+import usersRoutes from "./app/user/user.route";
+import { initPassport } from "./app/common/services/passport-jwt.service";
+import { loadConfig } from "./app/common/helper/config.hepler";
+import { type IUser } from "./app/user/user.dto";
+import errorHandler from "./app/common/middleware/error-handler.middleware";
 
 loadConfig();
 
@@ -50,11 +47,12 @@ const initApp = async (): Promise<void> => {
 
   // routes
   router.use("/users", usersRoutes);
-  router.use("/admin", roleAuth(UserRole.ADMIN, ["/register"]), adminRoutes);
 
   // error handler
   app.use(errorHandler);
-  http.createServer(app).listen(port);
+  http.createServer(app).listen(port, () => {
+    console.log("Server is runnuing on port", port);
+  });
 };
 
 void initApp();
